@@ -5,12 +5,12 @@ _pkgname="mitsuba"
 _pkgver="0.6.0"
 pkgname="${_pkgname}-git"
 pkgver=0.6.0.r2173.10af06f3
-pkgrel=1
+pkgrel=2
 pkgdesc="Mitsuba physically based renderer."
 url="http://mitsuba-renderer.org/"
 license=("GPL3")
 arch=("i686" "x86_64")
-depends=(python{,2} "xerces-c" "glew-1.13.0" "openexr" "libpng" "libjpeg" "qt5-base" "qt5-xmlpatterns" "fftw" "collada-dom-mitsuba" boost{,-python2}-libs "pcre")
+depends=(python{,2} "xerces-c" "glew-1.13.0" "glu" "openexr" "libpng" "libjpeg" "qt5-base" "qt5-xmlpatterns" "fftw" "collada-dom-mitsuba" boost{,-python2}-libs "pcre")
 makedepends=("eigen" "scons2" "git" boost{,-python2})
 provides=("mitsuba")
 conflicts=("mitsuba" "mitsuba-hg")
@@ -19,7 +19,7 @@ source=("${_pkgname}::git+https://github.com/mitsuba-renderer/mitsuba.git"
         "boost_107400.patch"
         )
 sha256sums=('SKIP'
-            '1a28b2639a80f4e426a040b69027331131a5b69bd2d3066fcc1e002f39d13eae'
+            'e501d1d6b33f3fffc516de74b42362079829200f55798894040694f7b8b776e0'
             'c4c571653c86e7c21d702f1f5cb9695edc32bf9fc05f6246e67a660693a32322')
 
 pkgver() {
