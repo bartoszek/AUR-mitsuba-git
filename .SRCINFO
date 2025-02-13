@@ -1,7 +1,7 @@
 pkgbase = mitsuba-git
 	pkgdesc = Mitsuba physically based renderer.
 	pkgver = 0.6.0.r2173.10af06f3
-	pkgrel = 2
+	pkgrel = 3
 	url = http://mitsuba-renderer.org/
 	arch = i686
 	arch = x86_64
@@ -14,7 +14,7 @@ pkgbase = mitsuba-git
 	depends = python
 	depends = python2
 	depends = xerces-c
-	depends = glew-1.13.0
+	depends = glew1.13
 	depends = glu
 	depends = openexr
 	depends = libpng

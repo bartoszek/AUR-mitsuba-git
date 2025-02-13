@@ -5,12 +5,12 @@ _pkgname="mitsuba"
 _pkgver="0.6.0"
 pkgname="${_pkgname}-git"
 pkgver=0.6.0.r2173.10af06f3
-pkgrel=2
+pkgrel=3
 pkgdesc="Mitsuba physically based renderer."
 url="http://mitsuba-renderer.org/"
 license=("GPL3")
 arch=("i686" "x86_64")
-depends=(python{,2} "xerces-c" "glew-1.13.0" "glu" "openexr" "libpng" "libjpeg" "qt5-base" "qt5-xmlpatterns" "fftw" "collada-dom-mitsuba" boost{,-python2}-libs "pcre")
+depends=(python{,2} "xerces-c" "glew1.13" "glu" "openexr" "libpng" "libjpeg" "qt5-base" "qt5-xmlpatterns" "fftw" "collada-dom-mitsuba" boost{,-python2}-libs "pcre")
 makedepends=("eigen" "scons2" "git" boost{,-python2})
 provides=("mitsuba")
 conflicts=("mitsuba" "mitsuba-hg")
@@ -41,7 +41,7 @@ prepare() {
     #sed -i -e "s:collada-dom:collada-dom2.4:g" -e "s:collada14dom:collada-dom2.4-dp:g" config.py
 
     ## update GLINCLUDE path to refere to glew-1.13.0 as mitsuba wont build with glew 2.0.0
-    sed -i "/XERCESLIB/aGLINCLUDE      = ['/usr/include/glew-1.13.0']" config.py
+    sed -i "/XERCESLIB/aGLINCLUDE      = ['/usr/include/glew1.13']" config.py
 
     ## fix qt5-base on archlinux provides QtWidgets pkg-config as Qt5Widgets
     sed -i -E "s/('Qt)([a-zA-Z]+')/\15\2/g" src/mtsgui/SConscript data/scons/qt5.py
@@ -66,7 +66,7 @@ prepare() {
 
 build() {
     cd "${_pkgname}"
-    scons2 --jobs=$((${MAKEFLAGS/-j/} - 1))
+    scons2 --jobs=$((${MAKEFLAGS/-j/} - 1)) GLLIBDIR="/usr/lib/glew1.13/"
 }
 
 package() {
