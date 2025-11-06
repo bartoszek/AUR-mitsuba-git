@@ -5,7 +5,7 @@ _pkgname="mitsuba"
 _pkgver="0.6.0"
 pkgname="${_pkgname}-git"
 pkgver=0.6.0.r2173.10af06f3
-pkgrel=3
+pkgrel=4
 pkgdesc="Mitsuba physically based renderer."
 url="http://mitsuba-renderer.org/"
 license=("GPL3")
@@ -60,6 +60,9 @@ prepare() {
 
     # Fix openexr:v3
     sed -i "s/^OEXRLIB.*/OEXRLIB = ['OpenEXR']/g" config.py
+
+    # Fix boost1.87: remove deprecated boost_system
+    sed -i "s/'boost_system',//g" config.py
 
     git apply -v ${srcdir}/{python3.9,boost_107400}.patch
 }
