@@ -1,16 +1,18 @@
 # Maintainer : bartus <arch-user-repoᘓbartus.33mail.com>
 # shellcheck disable=SC2034,SC2164,SC2154
 
+((DISABLE_EXR)) || depends+=('openexr2')
+
 _pkgname="mitsuba"
 _pkgver="0.6.0"
 pkgname="${_pkgname}-git"
 pkgver=0.6.0.r2173.10af06f3
-pkgrel=4
+pkgrel=5
 pkgdesc="Mitsuba physically based renderer."
 url="http://mitsuba-renderer.org/"
 license=("GPL3")
 arch=("i686" "x86_64")
-depends=(python{,2} "xerces-c" "glew1.13" "glu" "openexr" "libpng" "libjpeg" "qt5-base" "qt5-xmlpatterns" "fftw" "collada-dom" boost{,-python2}-libs "pcre")
+depends=(python{,2} "xerces-c" "glew1.13" "glu" "libpng" "libjpeg" "qt5-base" "qt5-xmlpatterns" "fftw" "collada-dom" boost{,-python2}-libs "pcre")
 makedepends=("eigen" "scons2" "git" boost{,-python2})
 provides=("mitsuba")
 conflicts=("mitsuba" "mitsuba-hg")
@@ -55,10 +57,6 @@ prepare() {
     sed -E -i "s/^(SH)?LINKFLAGS[ ]*= \[/&\'${LDFLAGS}\', /g" config.py
     sed -i "s/^CFLAGS[ ]*= \[/&\'${CFLAGS// /\',\'}\', /g" config.py
     sed -i "s/^CXXFLAGS[ ]*= \[/&\'${CXXFLAGS// /\',\'}\', /g" config.py
-
-    # Fix openexr:v3
-    sed -i "/OEXRINCLUDE/s|\[.*\]|&\[, '/usr/include/Imath' ]|;s/\]\[//" config.py
-    sed -i "/OEXRLIB/s/\[.*\]/['OpenEXR', 'OpenEXRCore', 'OpenEXRUtil', 'Iex', 'IlmThread']/" config.py
 
     # Fix boost1.87: remove deprecated boost_system
     sed -i "s/'boost_system',//g" config.py
