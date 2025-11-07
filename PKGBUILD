@@ -1,8 +1,6 @@
 # Maintainer : bartus <arch-user-repoᘓbartus.33mail.com>
 # shellcheck disable=SC2034,SC2164,SC2154
 
-((DISABLE_EXR)) || depends+=('openexr2')
-
 _pkgname="mitsuba"
 _pkgver="0.6.0"
 pkgname="${_pkgname}-git"
@@ -12,8 +10,8 @@ pkgdesc="Mitsuba physically based renderer."
 url="http://mitsuba-renderer.org/"
 license=("GPL3")
 arch=("i686" "x86_64")
-depends=(python{,2} "xerces-c" "glew1.13" "glu" "libpng" "libjpeg" "qt5-base" "qt5-xmlpatterns" "fftw" "collada-dom" boost{,-python2}-libs "pcre")
-makedepends=("eigen" "scons2" "git" boost{,-python2})
+depends=(python{,2} "xerces-c" "glew1.13" "glu" "openexr2-libs" "libpng" "libjpeg" "qt5-base" "qt5-xmlpatterns" "fftw" "collada-dom" boost{,-python2}-libs "pcre")
+makedepends=("eigen" "openexr2" "scons2" "git" boost{,-python2})
 provides=("mitsuba")
 conflicts=("mitsuba" "mitsuba-hg")
 source=("${_pkgname}::git+https://github.com/mitsuba-renderer/mitsuba.git"
